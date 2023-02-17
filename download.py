@@ -40,8 +40,9 @@ def save(user,m):
                     # print(video)
     try:
         avatar_url = m.get('avatar')
-        # NEED TO FIX ERROR WITH FILE NAME (2 \\ CAUSING ERROR
-        avatar_path = Path(avatar_dir,datetime.now().strftime("-- %A %B %d %Y at %I:%M %p"),avatar_url.split('/')[-1].strip())
+        avatar_ext = avatar_url.split('.')[-1]
+        avatar_path = Path(avatar_dir,datetime.now().strftime("%A %B %d %Y avatar.{}".format(avatar_ext)))
+        print(avatar_path)
         with open(avatar_path,'wb') as f:
             f.write(web.visit(avatar_url).content)
     except Exception as e:
