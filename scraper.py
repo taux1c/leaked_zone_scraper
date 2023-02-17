@@ -18,4 +18,9 @@ def main():
 
 
 
-main()
+if config.users:
+    main()
+elif open('users.txt','r'):
+    config.users = open('users.txt','r').readlines()
+else:
+    print('No users or user list specified. Exiting')
