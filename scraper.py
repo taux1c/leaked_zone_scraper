@@ -12,12 +12,6 @@ def main():
     for user in config.users:
         m = media.scrape(user)
         download.save(user,m)
-
-
-
-
-
-
 if config.users:
     main()
 elif open('users.txt','r'):
