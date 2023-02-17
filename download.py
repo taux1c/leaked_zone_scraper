@@ -10,10 +10,10 @@ def save(user,m):
     photos_dir.mkdir(parents=True,exist_ok=True)
     videos_dir.mkdir(parents=True,exist_ok=True)
     avatar_dir.mkdir(parents=True,exist_ok=True)
-    for photo in m.get('photos'):
-        if config.content_to_download == 'v':
-            pass
-        else:
+    if config.content_to_download == 'v':
+        pass
+    else:
+        for photo in m.get('photos'):
             response = web.visit(photo)
             size = response.headers.get('content-length')
             if config.max_file_size_mb and int(size) / 1000000 > config.max_file_size_mb:
@@ -23,10 +23,12 @@ def save(user,m):
                 new_file = Path(photos_dir,file)
                 with open(new_file,'wb') as f:
                     f.write(response.content)
-    for video in m.get('videos'):
-        if config.content_to_download == 'p':
-            pass
-        else:
+
+
+    if config.content_to_download == 'p':
+        pass
+    else:
+        for video in m.get('videos'):
             response = web.visit(video)
             size = response.headers.get('content-length')
             if config.max_file_size_mb and int(size) / 1000000 > config.max_file_size_mb:
